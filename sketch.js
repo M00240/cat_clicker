@@ -49,10 +49,12 @@ const vfxMessages = ["meow~", "purr~", "nya~", "gold meow!", "mrrrrp~"];
 let vfx = []; // Array to store visual effects
 
 function setup() {
-  createCanvas(400, 400);
+  let canvas = createCanvas(400, 400);
+  canvas.parent("canvas-container"); // Attach canvas to the container
   textAlign(CENTER, CENTER);
   noStroke();
 }
+
 
 function draw() {
   background(255, 255, 255); // Set background to white
