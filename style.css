@@ -1,7 +1,13 @@
 html, body {
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
 }
+
 canvas {
   display: block;
+  margin-top: 20px; /* Adjust this value to position the canvas vertically */
 }
