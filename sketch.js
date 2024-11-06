@@ -55,7 +55,7 @@ function setup() {
 }
 
 function draw() {
-  background(255,255,255); // Set background to white
+  background(255, 255, 255); // Set background to white
 
   if (gameOver) {
     // Display the end message if the game is over
@@ -67,11 +67,11 @@ function draw() {
     return; // Stop further drawing when game is over
   }
 
-  // Display gold
-  textSize(windowWidth * 0.05);
+  // Display gold in the top left corner
+  textSize(windowWidth * 0.04);
   fill(0, 114, 187);
-  textAlign(CENTER, CENTER);
-  text("Money: $" + gold, width / 2, height * 0.1);
+  textAlign(LEFT, TOP);
+  text("Money: $" + gold, width * 0.05, height * 0.05);
 
   // Check if the player has reached $1,000,000
   if (gold >= 1000000) {
@@ -126,11 +126,13 @@ function generateGold() {
 }
 
 function drawButtons() {
-  textSize(windowWidth * 0.04);
+  // Smaller button text
+  textSize(windowWidth * 0.03);
   let buttonWidth = windowWidth * 0.3;
   let buttonHeight = windowHeight * 0.08;
   
   fill(0, 114, 187);
+  textAlign(CENTER, CENTER);
   text(`${upgrades.portal.description}\nLvl ${upgrades.portal.level} | Cost: ${upgrades.portal.cost}`, width * 0.125 + buttonWidth / 2, height * 0.65 + buttonHeight / 2);
   text(`${upgrades.click.description}\nLvl ${upgrades.click.level} | Cost: ${upgrades.click.cost}`, width * 0.55 + buttonWidth / 2, height * 0.65 + buttonHeight / 2);
   text(`${upgrades.multiplier.description}\nLvl ${upgrades.multiplier.level} | Cost: ${upgrades.multiplier.cost}`, width * 0.325 + buttonWidth / 2, height * 0.8 + buttonHeight / 2);
@@ -148,8 +150,7 @@ function purchaseUpgrade(upgradeKey) {
 
 function displayVFX() {
   for (let i = vfx.length - 1; i >= 0; i--) {
-    let effect = vfx[i];
-    textSize(windowWidth * 0.04);
+    textSize(windowWidth * 0.03);
     fill(173, 40, 49, map(effect.lifespan, 0, 60, 0, 255)); // Fade out effect for text
     text(effect.text, effect.x, effect.y - (60 - effect.lifespan) / 2);
     effect.lifespan--;
