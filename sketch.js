@@ -55,7 +55,7 @@ function setup() {
 }
 
 function draw() {
-  background(255); // Set background to white
+  background(255,255,255); // Set background to white
 
   if (gameOver) {
     // Display the end message if the game is over
