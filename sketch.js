@@ -49,7 +49,7 @@ const vfxMessages = ["meow~", "purr~", "nya~", "gold meow!", "mrrrrp~"];
 let vfx = []; // Array to store visual effects
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(400, 400);
   textAlign(CENTER, CENTER);
   noStroke();
 }
@@ -59,19 +59,19 @@ function draw() {
 
   if (gameOver) {
     // Display the end message if the game is over
-    textSize(windowWidth * 0.08);
+    textSize(32);
     fill(0, 114, 187);
-    text("Congratulations!", width / 2, height / 2 - windowHeight * 0.05);
-    textSize(windowWidth * 0.05);
-    text("You are now a millionaire!", width / 2, height / 2 + windowHeight * 0.05);
+    text("Congratulations!", width / 2, height / 2 - 20);
+    textSize(20);
+    text("You are now a millionaire!", width / 2, height / 2 + 20);
     return; // Stop further drawing when game is over
   }
 
   // Display gold in the top left corner
-  textSize(windowWidth * 0.04);
+  textSize(16);
   fill(0, 114, 187);
   textAlign(LEFT, TOP);
-  text("Money: $" + gold, width * 0.05, height * 0.05);
+  text("Money: $" + gold, 20, 20);
 
   // Check if the player has reached $1,000,000
   if (gold >= 1000000) {
@@ -80,9 +80,9 @@ function draw() {
 
   // Display cat art with blinking effect
   textAlign(CENTER, CENTER);
-  textSize(windowWidth * 0.04);
+  textSize(18);
   let currentFace = isBlinking ? ">^,^<" : catFace; // Toggle face based on blink state
-  text(`        /\\_/\\  ♥\n   ${currentFace}\n   /   \\\n      (___)_/`, width / 2, height / 2 - windowHeight * 0.25);
+  text(`        /\\_/\\  ♥\n   ${currentFace}\n   /   \\\n      (___)_/`, width / 2, 150);
 
   // Generate gold automatically at set interval
   if (millis() - catTimer > catInterval) {
@@ -107,16 +107,16 @@ function mousePressed() {
   vfx.push({ text: randomMessage, x: mouseX, y: mouseY, lifespan: 60 });
 
   // Check for each upgrade button
-  let buttonWidth = windowWidth * 0.3;
-  let buttonHeight = windowHeight * 0.08;
+  let buttonWidth = 120;
+  let buttonHeight = 30;
   
-  if (mouseX > width * 0.125 && mouseX < width * 0.125 + buttonWidth && mouseY > height * 0.65 && mouseY < height * 0.65 + buttonHeight) {
+  if (mouseX > 50 && mouseX < 50 + buttonWidth && mouseY > 260 && mouseY < 260 + buttonHeight) {
     purchaseUpgrade("portal");
   }
-  if (mouseX > width * 0.55 && mouseX < width * 0.55 + buttonWidth && mouseY > height * 0.65 && mouseY < height * 0.65 + buttonHeight) {
+  if (mouseX > 230 && mouseX < 230 + buttonWidth && mouseY > 260 && mouseY < 260 + buttonHeight) {
     purchaseUpgrade("click");
   }
-  if (mouseX > width * 0.325 && mouseX < width * 0.325 + buttonWidth && mouseY > height * 0.8 && mouseY < height * 0.8 + buttonHeight) {
+  if (mouseX > 140 && mouseX < 140 + buttonWidth && mouseY > 320 && mouseY < 320 + buttonHeight) {
     purchaseUpgrade("multiplier");
   }
 }
@@ -126,16 +126,15 @@ function generateGold() {
 }
 
 function drawButtons() {
-  // Smaller button text
-  textSize(windowWidth * 0.03);
-  let buttonWidth = windowWidth * 0.3;
-  let buttonHeight = windowHeight * 0.08;
+  textSize(12);
+  let buttonWidth = 120;
+  let buttonHeight = 30;
   
   fill(0, 114, 187);
   textAlign(CENTER, CENTER);
-  text(`${upgrades.portal.description}\nLvl ${upgrades.portal.level} | Cost: ${upgrades.portal.cost}`, width * 0.125 + buttonWidth / 2, height * 0.65 + buttonHeight / 2);
-  text(`${upgrades.click.description}\nLvl ${upgrades.click.level} | Cost: ${upgrades.click.cost}`, width * 0.55 + buttonWidth / 2, height * 0.65 + buttonHeight / 2);
-  text(`${upgrades.multiplier.description}\nLvl ${upgrades.multiplier.level} | Cost: ${upgrades.multiplier.cost}`, width * 0.325 + buttonWidth / 2, height * 0.8 + buttonHeight / 2);
+  text(`${upgrades.portal.description}\nLvl ${upgrades.portal.level} | Cost: ${upgrades.portal.cost}`, 110, 275);
+  text(`${upgrades.click.description}\nLvl ${upgrades.click.level} | Cost: ${upgrades.click.cost}`, 290, 275);
+  text(`${upgrades.multiplier.description}\nLvl ${upgrades.multiplier.level} | Cost: ${upgrades.multiplier.cost}`, 200, 335);
 }
 
 function purchaseUpgrade(upgradeKey) {
@@ -150,7 +149,8 @@ function purchaseUpgrade(upgradeKey) {
 
 function displayVFX() {
   for (let i = vfx.length - 1; i >= 0; i--) {
-    textSize(windowWidth * 0.03);
+    let effect = vfx[i];
+    textSize(12);
     fill(173, 40, 49, map(effect.lifespan, 0, 60, 0, 255)); // Fade out effect for text
     text(effect.text, effect.x, effect.y - (60 - effect.lifespan) / 2);
     effect.lifespan--;
@@ -158,9 +158,4 @@ function displayVFX() {
       vfx.splice(i, 1); // Remove effect once lifespan is over
     }
   }
-}
-
-// Adjust canvas size when the window is resized
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
 }
